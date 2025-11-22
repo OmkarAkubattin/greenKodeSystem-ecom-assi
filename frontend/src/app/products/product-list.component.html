@@ -1,0 +1,30 @@
+<div class="container">
+  <header class="products-header">
+    <h1>Products</h1>
+    <p>Browse our collection</p>
+  </header>
+
+  <div *ngIf="loading" class="loading">
+    <div class="loading-spinner"></div>
+    <p>Loading products...</p>
+  </div>
+
+  <div *ngIf="error" class="alert alert-error">
+    {{ error }}
+  </div>
+
+  <div class="products-grid">
+    <div *ngFor="let p of products" class="product-card">
+      <div class="product-image">📦</div>
+      <h3>{{ p.name }}</h3>
+      <p>{{ p.description }}</p>
+      <div class="product-price">₹{{ p.price }}</div>
+      <div class="product-stock" [class.low]="p.stock <= 5">
+        Stock: {{ p.stock > 0 ? p.stock : 'Out of stock' }}
+      </div>
+      <button class="btn" (click)="addToCart(p.id)" [disabled]="p.stock <= 0">
+        {{ p.stock > 0 ? 'Add to Cart' : 'Out of Stock' }}
+      </button>
+    </div>
+  </div>
+</div>

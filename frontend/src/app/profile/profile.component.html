@@ -1,0 +1,30 @@
+<div class="profile-container">
+  <header class="profile-header">
+    <div class="profile-avatar">👤</div>
+    <h1>My Profile</h1>
+  </header>
+
+  <div class="tab-content">
+    <h2>Edit Profile</h2>
+    <form (ngSubmit)="save()" [formGroup]="form">
+      <div class="form-group">
+        <label>Full Name</label>
+        <input type="text" class="form-control" formControlName="name" />
+      </div>
+
+      <div class="form-group">
+        <label>Mobile Number</label>
+        <input type="tel" class="form-control" formControlName="mobile" />
+      </div>
+
+      <div
+        *ngIf="msg"
+        [class]="msg.includes('Failed') ? 'alert alert-error' : 'alert alert-success'"
+      >
+        {{ msg }}
+      </div>
+
+      <button type="submit" class="btn" [disabled]="form.invalid">Save Changes</button>
+    </form>
+  </div>
+</div>

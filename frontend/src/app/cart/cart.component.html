@@ -1,0 +1,43 @@
+<div class="cart-container">
+  <div class="cart-header">
+    <h1>Your Cart</h1>
+  </div>
+
+  <div *ngIf="!items.length" class="empty-state">
+    <p>Your cart is empty</p>
+  </div>
+
+  <div *ngIf="items.length">
+    <div *ngFor="let it of items" class="cart-item">
+      <div class="cart-item-info">
+        <div class="cart-item-name">{{ it.product.name }}</div>
+        <div class="cart-item-price">₹{{ it.product.price }}</div>
+      </div>
+      <div class="cart-item-controls">
+        <div class="quantity-controls">
+          <span>Qty:</span>
+          <input
+            type="number"
+            class="quantity-input"
+            [value]="it.quantity"
+            (change)="update(it, $any($event.target).valueAsNumber)"
+            min="1"
+          />
+        </div>
+        <div class="cart-item-price">₹{{ it.product.price * it.quantity }}</div>
+        <button class="btn btn-danger" (click)="remove(it)">Remove</button>
+      </div>
+    </div>
+
+    <div class="cart-summary">
+      <div class="cart-summary-row">
+        <div></div>
+        <div class="cart-summary-total">Total: ₹{{ total }}</div>
+      </div>
+
+      <div class="cart-actions">
+        <a routerLink="/checkout" class="btn">Proceed to Checkout</a>
+      </div>
+    </div>
+  </div>
+</div>

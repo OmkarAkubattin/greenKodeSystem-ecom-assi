@@ -1,0 +1,25 @@
+<table>
+  <thead>
+    <tr>
+      <th>Customer Name</th>
+      <th>Address</th>
+      <th>Phone</th>
+      <th>Total</th>
+    </tr>
+  </thead>
+  <tbody>
+    <ng-container *ngIf="items$ | async as items; else empty">
+      <tr *ngFor="let it of items">
+        <td>{{ it.customerName }}</td>
+        <td>{{ it.address }}</td>
+        <td>{{ it.phone }}</td>
+        <td>{{ it.total }}</td>
+      </tr>
+    </ng-container>
+    <ng-template #empty>
+      <tr>
+        <td colspan="4">No orders available.</td>
+      </tr>
+    </ng-template>
+  </tbody>
+</table>
